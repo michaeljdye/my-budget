@@ -1,13 +1,18 @@
 import { FC } from 'react'
 import { BudgetItem } from '@/components/budget'
 
-const budgetItems = [
-  { id: 1, name: 'Groceries', amount: 200, category: 'food' },
-  { id: 2, name: 'Entertainment', amount: 100, category: 'food' },
-  { id: 3, name: 'Fun Money', amount: 50, category: 'personal' },
-]
+type BudgetItem = {
+  id: number
+  name: string
+  amount: number
+  category: string
+}
 
-export const BudgetItems: FC = () => {
+type Props = {
+  budgetItems: BudgetItem[]
+}
+
+export const BudgetItems: FC<Props> = ({ budgetItems }) => {
   return (
     <div>
       <ul>
