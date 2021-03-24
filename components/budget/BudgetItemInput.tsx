@@ -1,4 +1,4 @@
-import { useState, FC, SyntheticEvent } from 'react'
+import { useState, FC, SyntheticEvent, ChangeEvent } from 'react'
 
 type BudgetItem = {
   id: number
@@ -12,12 +12,27 @@ type Props = {
 }
 
 const BudgetItemInput: FC<Props> = ({ addBudgetItem }) => {
-  const [value, setValue] = useState('')
+  const [values, setValues] = useState({
+    name: '',
+    amount: 0,
+    category: 'Home',
+  })
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setValues(() => ({ ...values, [e.target.name]: e.target.value }))
+  }
 
   const handleSubmit = (e: SyntheticEvent<HTMLFormElement>): void => {
     e.preventDefault()
 
-    const budgetItem = { id: 4, name: value, amount: 200, category: 'food' }
+    const budgetItem = {
+      id: 4,
+      name: values.name,
+      amount: values.amount,
+      category: values.category,
+    }
 
     addBudgetItem(budgetItem)
   }
@@ -26,10 +41,24 @@ const BudgetItemInput: FC<Props> = ({ addBudgetItem }) => {
     <form onSubmit={handleSubmit}>
       <input
         type='text'
-        name='budgetItem'
-        value={value}
-        onChange={e => setValue(e.target.value)}
+        name='name'
+        value={values.name}
+        onChange={handleChange}
+        placeholder='Name'
       />
+      <input
+        type='number'
+        name='amount'
+        value={values.amount}
+        onChange={handleChange}
+        placeholder='Amount'
+      />
+      <select name='category' value={values.category} onChange={handleChange}>
+        <option value='Home'>Home</option>
+        <option value='Food'>Food</option>
+        <option value='Gifts'>Gifts</option>
+      </select>
+      <button type='submit'>Add</button>
     </form>
   )
 }

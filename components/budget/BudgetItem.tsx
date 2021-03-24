@@ -8,6 +8,12 @@ type props = {
   }
 }
 
-export const BudgetItem: FC<props> = ({ budgetItem: { name } }) => {
-  return <li>{name}</li>
+export const BudgetItem: FC<props> = ({
+  budgetItem: { name, amount, category },
+}) => {
+  return (
+    <li>
+      {name} - ${amount} - {category}
+    </li>
+  )
 }
