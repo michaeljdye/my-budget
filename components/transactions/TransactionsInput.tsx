@@ -11,7 +11,7 @@ type Props = {
   addBudgetItem(value: BudgetItem): void
 }
 
-const BudgetItemInput: FC<Props> = ({ addBudgetItem }) => {
+export const TransactionsInput: FC<Props> = ({ addBudgetItem }) => {
   const [values, setValues] = useState({
     name: '',
     amount: 0,
@@ -62,5 +62,3 @@ const BudgetItemInput: FC<Props> = ({ addBudgetItem }) => {
     </form>
   )
 }
-
-export default BudgetItemInput

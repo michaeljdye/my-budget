@@ -1,15 +1,15 @@
 import { FC } from 'react'
 
 type props = {
-  budgetItem: {
+  expenseItem: {
     name: string
     category: string
     amount: number
   }
 }
 
-export const BudgetItem: FC<props> = ({
-  budgetItem: { name, amount, category },
+export const ExpenseItem: FC<props> = ({
+  expenseItem: { name, amount, category },
 }) => {
   return (
     <li>
