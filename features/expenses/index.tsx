@@ -11,22 +11,29 @@ type ExpenseItem = {
 
 type Props = {
   expenseItems: ExpenseItem[]
+  category: string
 }
 
-export const Expenses: FC<Props> = ({ expenseItems }) => {
+export const Expenses: FC<Props> = ({ expenseItems, category }) => {
   const [total, setTotal] = useState(0)
 
+  const expenses = expenseItems.filter(
+    ({ category: expenseCategory }) => expenseCategory === category
+  )
+
   useEffect(() => {
-    const newTotal = expenseItems.reduce((acc, { amount }) => {
+    const newTotal = expenses.reduce((acc, { amount }) => {
       return acc + +amount
     }, 0)
 
     setTotal(newTotal)
   }, [expenseItems])
 
+  console.log('CATEGORY', category)
+
   return (
     <>
-      <ExpenseItems expenseItems={expenseItems} />
+      <ExpenseItems expenseItems={expenses} />
       <ExpenseTotal total={total} />
     </>
   )

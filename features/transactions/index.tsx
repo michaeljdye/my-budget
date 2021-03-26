@@ -1,6 +1,7 @@
 import { useState, FC } from 'react'
-import styled from '@emotion/styled'
+import Button from '@material-ui/core/Button'
 import { TransactionsInput } from '@/components/transactions'
+import { Box } from '@material-ui/core'
 
 type ExpenseItem = {
   id: number
@@ -14,24 +15,28 @@ type Props = {
 }
 
 export const Transactions: FC<Props> = ({ addBudgetItem }) => {
-  const [isHidden, setIsHidden] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+
+  const handleOpenModal = () => {
+    setIsOpen(true)
+  }
 
   return (
     <div>
-      <button onClick={() => setIsHidden(prevHidden => !prevHidden)}>
-        Add Transaction
-      </button>
-      <TransactionsForm isHidden={isHidden}>
-        <TransactionsInput addBudgetItem={addBudgetItem} />
-      </TransactionsForm>
+      <Box mt={2}>
+        <Button variant='contained' color='secondary' onClick={handleOpenModal}>
+          Add Transaction
+        </Button>
+      </Box>
+      <TransactionsInput
+        addBudgetItem={addBudgetItem}
+        isOpen={isOpen}
+        handleClose={handleClose}
+      />
     </div>
   )
 }
-
-type StyleProps = {
-  isHidden: boolean
-}
-
-const TransactionsForm = styled.div<StyleProps>`
-  display: ${({ isHidden }) => (isHidden ? 'none' : 'block')};
-`

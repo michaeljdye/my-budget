@@ -1,8 +1,21 @@
 // import App from "next/app";
 import type { AppProps /*, AppContext */ } from 'next/app'
+import Head from 'next/head'
+import '@fontsource/roboto'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <>
+      <Head>
+        <link
+          rel='stylesheet'
+          href='https://fonts.googleapis.com/icon?family=Material+Icons'
+        />
+      </Head>
+
+      <Component {...pageProps} />
+    </>
+  )
 }
 
 // Only uncomment this method if you have blocking data requirements for
