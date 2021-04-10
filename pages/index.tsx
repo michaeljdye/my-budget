@@ -1,8 +1,9 @@
-import { useState, FC } from 'react'
+import { useState, useEffect, FC } from 'react'
+import { Typography } from '@material-ui/core'
+
 import { Layout } from '@/components/layout'
 import { Expenses } from '@/features/expenses'
 import { Transactions } from '@/features/transactions'
-import { Typography } from '@material-ui/core'
 
 const Home: FC = () => {
   type ExpenseItem = {
@@ -14,13 +15,22 @@ const Home: FC = () => {
 
   const categoryData = ['Home', 'Food', 'Gifts']
 
-  const expenseData = [
-    { id: 1, name: 'Groceries', amount: 200, category: 'Food' },
-    { id: 2, name: 'Entertainment', amount: 100, category: 'Food' },
-    { id: 3, name: "Nicole's Birthday", amount: 50, category: 'Gifts' },
-  ]
+  const [expenseItems, setExpenseItems] = useState([])
 
-  const [expenseItems, setExpenseItems] = useState(expenseData)
+  const getExpenses = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/users')
+      const expenses = await response.json()
+
+      setExpenseItems(expenses)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getExpenses()
+  }, [])
 
   const addBudgetItem = (expenseItem: ExpenseItem): void => {
     setExpenseItems(prevExpenseItems => [...prevExpenseItems, expenseItem])

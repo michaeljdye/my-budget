@@ -29,8 +29,6 @@ export const Expenses: FC<Props> = ({ expenseItems, category }) => {
     setTotal(newTotal)
   }, [expenseItems])
 
-  console.log('CATEGORY', category)
-
   return (
     <>
       <ExpenseItems expenseItems={expenses} />
