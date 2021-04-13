@@ -42,7 +42,6 @@ export const Header: FC = () => {
         <Typography variant='h6' className={classes.title}>
           My Budget
         </Typography>
-        <Button color='inherit'>Login</Button>
       </Toolbar>
     </AppBar>
   )

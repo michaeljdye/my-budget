@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { Grid } from '@material-ui/core'
 import { ExpenseItem } from '@/components/expense'
 
 type ExpenseItem = {
@@ -15,11 +16,13 @@ type Props = {
 export const ExpenseItems: FC<Props> = ({ expenseItems }) => {
   return (
     <div>
-      <ul>
+      <Grid container>
         {expenseItems.map(({ id, ...rest }) => (
-          <ExpenseItem key={id} expenseItem={rest} />
+          <Grid item xs={12}>
+            <ExpenseItem key={id} expenseItem={rest} />
+          </Grid>
         ))}
-      </ul>
+      </Grid>
     </div>
   )
 }

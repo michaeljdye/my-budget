@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { Box, Typography, Paper } from '@material-ui/core'
 
 type props = {
   expenseItem: {
@@ -12,8 +13,12 @@ export const ExpenseItem: FC<props> = ({
   expenseItem: { name, amount, category },
 }) => {
   return (
-    <li>
-      {name} - ${amount} - {category}
-    </li>
+    <Paper elevation={3}>
+      <Box my={1} px={2} py={1}>
+        <Typography variant='body1'>
+          {name} - ${amount} - {category}
+        </Typography>
+      </Box>
+    </Paper>
   )
 }

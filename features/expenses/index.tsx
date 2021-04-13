@@ -1,4 +1,5 @@
 import { useState, useEffect, FC } from 'react'
+import { Grid } from '@material-ui/core'
 import { ExpenseItems } from '@/components/expense'
 import { ExpenseTotal } from '@/components/expense'
 

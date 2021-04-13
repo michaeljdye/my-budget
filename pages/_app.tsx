@@ -1,7 +1,23 @@
 // import App from "next/app";
 import type { AppProps /*, AppContext */ } from 'next/app'
+import { ThemeProvider, createMuiTheme, CssBaseline } from '@material-ui/core'
 import Head from 'next/head'
 import '@fontsource/roboto'
+
+const theme = createMuiTheme({
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        html: {
+          WebkitFontSmoothing: 'auto',
+        },
+        body: {
+          margin: 0,
+        },
+      },
+    },
+  },
+})
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -12,8 +28,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           href='https://fonts.googleapis.com/icon?family=Material+Icons'
         />
       </Head>
-
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   )
 }
