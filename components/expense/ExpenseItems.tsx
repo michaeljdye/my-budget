@@ -1,28 +1,27 @@
-import { FC } from 'react'
-import { Grid } from '@material-ui/core'
-import { ExpenseItem } from '@/components/expense'
+import { FC } from "react";
+import { ExpenseItem } from "@/components/expense";
 
 type ExpenseItem = {
-  id: number
-  name: string
-  amount: number
-  category: string
-}
+  id: number;
+  name: string;
+  amount: number;
+  category: string;
+};
 
 type Props = {
-  expenseItems: ExpenseItem[]
-}
+  expenseItems: ExpenseItem[];
+};
 
 export const ExpenseItems: FC<Props> = ({ expenseItems }) => {
   return (
     <div>
-      <Grid container>
+      <div>
         {expenseItems.map(({ id, ...rest }) => (
-          <Grid item xs={12}>
+          <div>
             <ExpenseItem key={id} expenseItem={rest} />
-          </Grid>
+          </div>
         ))}
-      </Grid>
+      </div>
     </div>
-  )
-}
+  );
+};

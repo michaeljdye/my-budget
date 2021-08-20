@@ -1,69 +1,57 @@
-import { useState, useEffect, FC } from 'react'
-import { Typography, Container, makeStyles } from '@material-ui/core'
+import { useState, useEffect, FC } from "react";
 
-import { Layout } from '@/components/layout'
-import { Expenses } from '@/features/expenses'
-import { Transactions } from '@/features/transactions'
+import { Layout } from "@/components/layout";
+import { Expenses } from "@/features/expenses";
+import { Transactions } from "@/features/transactions";
 
 type ExpenseItem = {
-  id: number
-  name: string
-  category: string
-  amount: number
-}
-
-const useStyles = makeStyles({
-  categoryHeading: {
-    paddingTop: 20,
-    paddingBottom: 20,
-  },
-})
+  id: number;
+  name: string;
+  category: string;
+  amount: number;
+};
 
 const Home: FC = () => {
-  const classes = useStyles()
+  const categoryData = ["Home", "Food", "Gifts"];
 
-  const categoryData = ['Home', 'Food', 'Gifts']
-
-  const [expenseItems, setExpenseItems] = useState([])
+  const [expenseItems, setExpenseItems] = useState([]);
 
   const getExpenses = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/expenses')
-      const expenses = await response.json()
+      const response = await fetch("http://localhost:3000/api/expenses");
+      const expenses = await response.json();
 
-      setExpenseItems(expenses)
+      setExpenseItems(expenses);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    getExpenses()
-  }, [])
+    getExpenses();
+  }, []);
 
   const addBudgetItem = (expenseItem: ExpenseItem): void => {
-    setExpenseItems(prevExpenseItems => [...prevExpenseItems, expenseItem])
-  }
+    setExpenseItems((prevExpenseItems) => [...prevExpenseItems, expenseItem]);
+  };
 
   return (
     <Layout>
-      <Container maxWidth='lg'>
-        {categoryData.map(category => (
+      <div>
+        {categoryData.map((category) => (
           <>
-            <Typography
-              variant='h4'
-              component='h2'
-              className={classes.categoryHeading}
-            >
-              {category}
-            </Typography>
-            <Expenses category={category} expenseItems={expenseItems} />
+            <p>{category}</p>
+            <Expenses
+              category={category}
+              expenseItems={expenseItems}
+              setExpenseItems={setExpenseItems}
+            />
           </>
         ))}
         <Transactions addBudgetItem={addBudgetItem} />
-      </Container>
+      </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
