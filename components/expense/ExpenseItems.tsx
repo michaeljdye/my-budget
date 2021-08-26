@@ -17,7 +17,7 @@ export const ExpenseItems: FC<Props> = ({ expenseItems }) => {
     <div>
       <div>
         {expenseItems.map(({ id, ...rest }) => (
-          <div>
+          <div key={id}>
             <ExpenseItem key={id} expenseItem={rest} />
           </div>
         ))}

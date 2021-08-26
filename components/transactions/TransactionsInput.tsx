@@ -29,9 +29,11 @@ export const TransactionsInput: FC<Props> = ({ addBudgetItem }) => {
     const budgetItem = {
       id: 4,
       name: values.name,
-      amount: values.amount,
+      amount: +values.amount,
       category: values.category,
     };
+
+    console.log("budgetItem", budgetItem);
 
     addBudgetItem(budgetItem);
   };

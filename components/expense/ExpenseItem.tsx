@@ -1,4 +1,4 @@
-import { FC } from "react";
+import formatCurrency from "../../utils/formatCurrency";
 
 type props = {
   expenseItem: {
@@ -8,13 +8,13 @@ type props = {
   };
 };
 
-export const ExpenseItem: FC<props> = ({
+export const ExpenseItem = ({
   expenseItem: { name, amount, category },
-}) => {
+}: props) => {
   return (
     <div>
       <p>
-        {name} - ${amount} - {category}
+        {name} - {formatCurrency(amount)} - {category}
       </p>
     </div>
   );
